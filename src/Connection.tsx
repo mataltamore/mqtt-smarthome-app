@@ -18,7 +18,7 @@ export default function Connection(props: ConnectionProps) {
     event.preventDefault();
 
     const url = `wss://${hostRef.current?.value}:${portRef.current?.value}/`;
-    console.log("url: ", url);
+
     const options: IClientOptions = {
       keepalive: 30,
       protocolId: "MQTT",
