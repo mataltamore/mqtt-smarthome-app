@@ -104,6 +104,10 @@ export default function useMQTT() {
         return console.error(
           `Unsubscribe to ${topic} got this error: ${error}`
         );
+
+      if (!payloads.find((item) => item.topic === topic)) return;
+
+      setPayloads((prev) => prev.filter((item) => item.topic !== topic));
     };
 
     client.unsubscribe(topic, closeCallback);
