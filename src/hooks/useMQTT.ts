@@ -7,7 +7,12 @@ import {
 } from "precompiled-mqtt";
 import { useEffect, useState } from "react";
 
-type MQTTStatus = "Connect" | "Connected" | "Reconnecting" | "Connecting";
+type MQTTStatus =
+  | "Connect"
+  | "Connected"
+  | "Reconnecting"
+  | "Connecting"
+  | "Disconnecting";
 type MQTTPayloadItem = { topic: string; data: string };
 type MQTTPayload = Array<MQTTPayloadItem>;
 
@@ -32,8 +37,20 @@ export default function useMQTT() {
       setStatus("Reconnecting");
     });
 
-    client.on("disconnect", () => {
+    // client.on("disconnect", () => {
+    //   setStatus("Disconnect");
+    // });
+
+    client.on("close", () => {
+      setStatus("Disconnecting");
+    });
+
+    client.on("end", () => {
       setStatus("Connect");
+    });
+
+    client.on("error", (error) => {
+      console.error(`An error has occurred: ${error}`);
     });
 
     client.on("message", (topic, message) => {
@@ -42,7 +59,6 @@ export default function useMQTT() {
 
       setPayloads((prev) =>
         prev.map((item) => {
-          console.log("passo");
           if (item.topic === topic)
             return { ...item, data: message.toString() };
           return item;
