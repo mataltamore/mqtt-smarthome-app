@@ -8,7 +8,7 @@ export default function Topic(props: TopicProps) {
   const topicName = useRef<HTMLInputElement>(null);
 
   return (
-    <div>
+    <div className={classes.container}>
       <input type="text" ref={topicName} />
       <button
         type="button"
