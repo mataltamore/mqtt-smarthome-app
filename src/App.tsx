@@ -1,3 +1,4 @@
+import MainLayout from "./components/MainLayout";
 import Connection from "./Connection";
 import useMQTT from "./hooks/useMQTT";
 
@@ -6,16 +7,7 @@ export default function App() {
   const { connect, disconnect, subscribe, unsubscribe } = actions;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        gap: "1rem",
-        height: "100vh",
-      }}
-    >
+    <MainLayout>
       <Connection connectBtn={status} {...{ connect, disconnect }} />
 
       <div>
@@ -50,6 +42,6 @@ export default function App() {
           ))}
         </ul>
       </div>
-    </div>
+    </MainLayout>
   );
 }
