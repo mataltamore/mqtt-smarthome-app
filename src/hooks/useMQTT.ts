@@ -6,15 +6,7 @@ import {
   CloseCallback,
 } from "precompiled-mqtt";
 import { useEffect, useState } from "react";
-
-type MQTTStatus =
-  | "Connect"
-  | "Connected"
-  | "Reconnecting"
-  | "Connecting"
-  | "Disconnecting";
-type MQTTPayloadItem = { topic: string; data: string };
-type MQTTPayload = Array<MQTTPayloadItem>;
+import { MQTTPayload, MQTTStatus } from "../types/useMQTT";
 
 export default function useMQTT() {
   const [client, setClient] = useState<MqttClient>();
