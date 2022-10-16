@@ -1,12 +1,9 @@
-import { IClientOptions } from "mqtt";
+import classes from "./Connect.module.scss";
+import { IClientOptions } from "precompiled-mqtt";
 import { useRef } from "react";
-interface ConnectionProps {
-  connect: (host: string, mqttOption: IClientOptions) => void;
-  disconnect: () => void;
-  connectBtn: string;
-}
+import { ConnectProps } from "../../types/Connect";
 
-export default function Connection(props: ConnectionProps) {
+export default function Connect(props: ConnectProps) {
   const { connect, disconnect, connectBtn } = props;
   const hostRef = useRef<HTMLInputElement>(null);
   const portRef = useRef<HTMLInputElement>(null);
@@ -45,40 +42,34 @@ export default function Connection(props: ConnectionProps) {
   };
 
   return (
-    <form
-      onSubmit={handleConnect}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 10,
-        maxWidth: 350,
-      }}
-    >
-      <input type="text" placeholder="host" name="host" ref={hostRef} />
-      <input type="text" placeholder="port" name="port" ref={portRef} />
-      <input
-        type="text"
-        placeholder="client-id"
-        name="clientid"
-        ref={clientIdRef}
-      />
-      <input
-        type="text"
-        placeholder="username"
-        name="username"
-        ref={usernameRef}
-      />
-      <input
-        type="text"
-        placeholder="password"
-        name="password"
-        ref={passwordRef}
-      />
+    <div className={classes.container}>
+      <form onSubmit={handleConnect}>
+        <input type="text" placeholder="host" name="host" ref={hostRef} />
+        <input type="text" placeholder="port" name="port" ref={portRef} />
+        <input
+          type="text"
+          placeholder="client-id"
+          name="clientid"
+          ref={clientIdRef}
+        />
+        <input
+          type="text"
+          placeholder="username"
+          name="username"
+          ref={usernameRef}
+        />
+        <input
+          type="text"
+          placeholder="password"
+          name="password"
+          ref={passwordRef}
+        />
 
-      <button type="submit">{connectBtn}</button>
-      <button type="button" onClick={handleDisconnect}>
-        Disconnect
-      </button>
-    </form>
+        <button type="submit">{connectBtn}</button>
+        <button type="button" onClick={handleDisconnect}>
+          Disconnect
+        </button>
+      </form>
+    </div>
   );
 }

@@ -1,0 +1,14 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/variables.scss";
+
+.container {
+  border-radius: 20px;
+  padding: 2rem;
+  background-color: $background-login;
+
+  & > form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

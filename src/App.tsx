@@ -1,5 +1,5 @@
 import MainLayout from "./components/MainLayout";
-import Connection from "./Connection";
+import Connect from "./components/Connect";
 import useMQTT from "./hooks/useMQTT";
 
 export default function App() {
@@ -8,7 +8,7 @@ export default function App() {
 
   return (
     <MainLayout>
-      <Connection connectBtn={status} {...{ connect, disconnect }} />
+      <Connect connectBtn={status} {...{ connect, disconnect }} />
 
       <div>
         <div
