@@ -7,7 +7,7 @@ export default function AddTopic(props: AddTopicProps) {
 
   return (
     <div className={classes.container} onClick={handleClick}>
-      <IconCirclePlus /> Add another topic
+      <IconCirclePlus /> <span>Add another topic</span>
     </div>
   );
 }

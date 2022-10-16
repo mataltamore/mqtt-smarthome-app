@@ -1,26 +1,36 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { TopicProps } from "../../types/Topic";
 import classes from "./Topic.module.scss";
 
 export default function Topic(props: TopicProps) {
   const { subscribe, unsubscribe, payloads } = props;
   // "sensor/temperature"
-  const [topicName, setTopicName] = useState("");
+  const topicName = useRef<HTMLInputElement>(null);
 
   return (
     <div>
-      <input
-        type="text"
-        onChange={(e) => setTopicName(e.currentTarget.value)}
-      />
-      <button type="button" onClick={() => subscribe(topicName)}>
+      <input type="text" ref={topicName} />
+      <button
+        type="button"
+        onClick={() => {
+          if (topicName.current) subscribe(topicName.current.value);
+        }}
+      >
         Subscribe
       </button>
-      <button type="button" onClick={() => unsubscribe(topicName)}>
+      <button
+        type="button"
+        onClick={() => {
+          if (topicName.current) unsubscribe(topicName.current.value);
+        }}
+      >
         Unsubscribe
       </button>
 
-      {payloads.find((payload) => payload.topic === topicName)?.data}
+      {
+        payloads.find((payload) => payload.topic === topicName.current?.value)
+          ?.data
+      }
     </div>
   );
 }

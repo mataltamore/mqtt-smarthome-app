@@ -1,2 +1,15 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $background-temperature;
+  }
+}
